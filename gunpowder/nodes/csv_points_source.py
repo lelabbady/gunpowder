@@ -56,7 +56,9 @@ class CsvPointsSource(BatchProvider):
             return
         print(self.data.shape)
         print(self.data)
-
+        
+        min_coord = np.floor(np.amin(self.data[:,:self.ndims]))
+        print(min_coord)
         min_bb = Coordinate(np.floor(np.amin(self.data[:,:self.ndims])))
         max_bb = Coordinate(np.ceil(np.amax(self.data[:,:self.ndims])) + 1)
 
