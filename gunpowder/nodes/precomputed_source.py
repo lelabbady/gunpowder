@@ -28,9 +28,13 @@ class PrecomputedSource(BatchProvider):
 
     """
 
-    def __init__(self, datasets):
+    def __init__(self, datasets, array_specs=None):
 
         self.datasets = datasets
+        if array_specs is None:
+            self.array_specs = {}
+        else:
+            self.array_specs = array_specs
 
     def setup(self):
         for key,vol in self.datasets.items():
@@ -69,8 +73,11 @@ class PrecomputedSource(BatchProvider):
 
         return batch
 
-    def __read_spec(self, vol):
-        spec = ArraySpec()
+    def __read_spec(self, array_key, vol):
+        if array_key in self.array_specs:
+            spec = self.array_specs[array_key].copy()
+        else:
+            spec = ArraySpec()
         # spec.voxel_size = Coordinate(vol.resolution)
         spec.voxel_size = Coordinate((1, 1, 1))
         offset = Coordinate(vol.voxel_offset)
