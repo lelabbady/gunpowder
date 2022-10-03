@@ -33,6 +33,8 @@ class PrecomputedSource(BatchProvider):
         self.datasets = datasets
 
     def setup(self):
+        for key,vol in self.datasets.items():
+            print(key,vol)
 
         for key, vol in self.datasets.items():
             spec = self.__read_spec(vol)
