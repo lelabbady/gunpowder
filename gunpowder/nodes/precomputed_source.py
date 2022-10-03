@@ -41,7 +41,7 @@ class PrecomputedSource(BatchProvider):
             print(key,vol)
 
         for key, vol in self.datasets.items():
-            spec = self.__read_spec(vol)
+            spec = self.__read_spec(key, vol)
             self.provides(key, spec)
 
     def provide(self, request):
