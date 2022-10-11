@@ -294,6 +294,10 @@ class ElasticAugment(BatchFilter):
         prev = None
         for array_key in request.array_specs.keys():
             if voxel_size is None:
+                print('This is array key')
+                print(array_key)
+                print('This is self spec')
+                print(self.spec[array_key])
                 voxel_size = self.spec[array_key].voxel_size[-self.spatial_dims:]
             elif self.spec[array_key].voxel_size is not None:
                 assert voxel_size == self.spec[array_key].voxel_size[-self.spatial_dims:], \
