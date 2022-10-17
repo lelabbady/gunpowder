@@ -52,7 +52,7 @@ class PrecomputedSource(BatchProvider):
         batch = Batch()
 
         for key, request_spec in request.array_specs.items():
-            # voxel_size = self.spec[self.key].voxel_size
+            voxel_size = self.spec[self.key].voxel_size
             # dataset_roi = request_spec.roi / voxel_size
             # dataset_roi = dataset_roi - self.spec[self.key].roi.get_offset() / voxel_size
             dataset_roi = request_spec.roi
