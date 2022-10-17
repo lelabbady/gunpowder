@@ -78,8 +78,8 @@ class PrecomputedSource(BatchProvider):
             spec = self.array_specs[array_key].copy()
         else:
             spec = ArraySpec()
-        # spec.voxel_size = Coordinate(vol.resolution)
-        spec.voxel_size = Coordinate((1, 1, 1))
+        spec.voxel_size = Coordinate(vol.resolution)
+        #spec.voxel_size = Coordinate((1, 1, 1))
         offset = Coordinate(vol.voxel_offset)
         shape = Coordinate(vol.volume_size)
         spec.roi = Roi(offset, shape)
