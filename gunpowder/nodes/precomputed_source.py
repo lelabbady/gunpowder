@@ -80,8 +80,8 @@ class PrecomputedSource(BatchProvider):
             spec = ArraySpec()
         spec.voxel_size = Coordinate(vol.resolution[::-1])
         #spec.voxel_size = Coordinate((1, 1, 1))
-        offset = Coordinate(vol.voxel_offset)
-        shape = Coordinate(vol.volume_size)
+        offset = Coordinate(vol.voxel_offset[::-1])
+        shape = Coordinate(vol.volume_size[::-1])
         spec.roi = Roi(offset, shape)
         spec.dtype = vol.dtype
 
