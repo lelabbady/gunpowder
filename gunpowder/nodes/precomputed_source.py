@@ -99,9 +99,9 @@ class PrecomputedSource(BatchProvider):
         return spec
 
     def __read(self, vol, roi):
-        xyz_roi = roi[::-1]
+        xyz_roi = roi.to_slices()[::-1]
         
-        return np.squeeze(vol[xyz_roi.to_slices()], axis=3)
+        return np.squeeze(vol[xyz_roi], axis=3)
 
     def name(self):
 
