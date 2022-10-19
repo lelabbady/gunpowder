@@ -78,10 +78,13 @@ class PrecomputedSource(BatchProvider):
             spec = self.array_specs[array_key].copy()
         else:
             spec = ArraySpec()
-        spec.voxel_size = Coordinate(vol.resolution[::-1])
+        zyx_voxel_size = vol.resolution[::-1]
+        zyx_offset = vol.voxel_offset[::-1]
+        zyx_volume_size = vol.volume_size[::-1]
+        spec.voxel_size = Coordinate(zyx_voxel_size)
         #spec.voxel_size = Coordinate((1, 1, 1))
-        offset = Coordinate(vol.voxel_offset[::-1])
-        shape = Coordinate(vol.volume_size[::-1])
+        offset = Coordinate(zyx_offset)
+        shape = Coordinate(zyx_volume_size)
         spec.roi = Roi(offset, shape)
         spec.dtype = vol.dtype
 
@@ -96,7 +99,9 @@ class PrecomputedSource(BatchProvider):
         return spec
 
     def __read(self, vol, roi):
-        return np.squeeze(vol[roi.to_slices()], axis=3)
+        xyz_roi = roi[::-1]
+        
+        return np.squeeze(vol[xyz_roi.to_slices()], axis=3)
 
     def name(self):
 
