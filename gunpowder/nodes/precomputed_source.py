@@ -81,7 +81,7 @@ class PrecomputedSource(BatchProvider):
         zyx_voxel_size = vol.resolution[::-1]
         zyx_offset = vol.voxel_offset[::-1]
         zyx_volume_size = vol.volume_size[::-1]
-        spec.voxel_size = Coordinate(vol.voxel_size)
+        spec.voxel_size = Coordinate(vol.resolution)
         #spec.voxel_size = Coordinate((1, 1, 1))
         offset = Coordinate(vol.voxel_offset)
         shape = Coordinate(vol.volume_size)
