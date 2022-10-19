@@ -46,7 +46,7 @@ class IntensityAugment(BatchFilter):
         assert raw.data.min() >= 0 and raw.data.max() <= 1, "Intensity augmentation expects raw values in [0,1]. Consider using Normalize before."
 
         if self.z_section_wise:
-            for z in range((raw.spec.roi/self.spec[self.array].voxel_size).get_shape()[z_slice]):
+            for z in range((raw.spec.roi/self.spec[self.array].voxel_size).get_shape()[self.z_slice]):
                 raw.data[z] = self.__augment(
                         raw.data[z],
                         np.random.uniform(low=self.scale_min, high=self.scale_max),
