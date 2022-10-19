@@ -28,13 +28,14 @@ class IntensityAugment(BatchFilter):
             assumes that z is the first dimension.
     '''
 
-    def __init__(self, array, scale_min, scale_max, shift_min, shift_max, z_section_wise=False):
+    def __init__(self, array, scale_min, scale_max, shift_min, shift_max, z_section_wise=False, z_slice=0):
         self.array = array
         self.scale_min = scale_min
         self.scale_max = scale_max
         self.shift_min = shift_min
         self.shift_max = shift_max
         self.z_section_wise = z_section_wise
+        self.z_slice = z_slice
 
     def process(self, batch, request):
 
@@ -45,7 +46,7 @@ class IntensityAugment(BatchFilter):
         assert raw.data.min() >= 0 and raw.data.max() <= 1, "Intensity augmentation expects raw values in [0,1]. Consider using Normalize before."
 
         if self.z_section_wise:
-            for z in range((raw.spec.roi/self.spec[self.array].voxel_size).get_shape()[0]):
+            for z in range((raw.spec.roi/self.spec[self.array].voxel_size).get_shape()[z_slice]):
                 raw.data[z] = self.__augment(
                         raw.data[z],
                         np.random.uniform(low=self.scale_min, high=self.scale_max),
