@@ -172,7 +172,7 @@ class BatchProvider(object):
             print('This is provided_roi')
             print(provided_roi)
             print('This is request_roi')
-            print(requested_roi)
+            print(request_roi)
             if provided_roi is not None:
                 assert provided_roi.contains(request_roi), "%s: %s's ROI %s outside of my ROI %s"%(self.name(), key, request_roi, provided_roi)
 
