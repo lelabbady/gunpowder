@@ -53,9 +53,9 @@ class PrecomputedSource(BatchProvider):
 
         for key, request_spec in request.array_specs.items():
             voxel_size = request_spec.voxel_size
-            # dataset_roi = request_spec.roi / voxel_size
-            # dataset_roi = dataset_roi - self.spec[self.key].roi.get_offset() / voxel_size
-            dataset_roi = request_spec.roi
+            dataset_roi = request_spec.roi / voxel_size
+            dataset_roi = dataset_roi - self.spec[self.key].roi.get_offset() / voxel_size
+            #dataset_roi = request_spec.roi
 
             # create array spec
             array_spec = self.spec[key].copy()
@@ -78,10 +78,17 @@ class PrecomputedSource(BatchProvider):
             spec = self.array_specs[array_key].copy()
         else:
             spec = ArraySpec()
-        spec.voxel_size = Coordinate(vol.resolution)
+
+        zyx_voxel_size = vol.resolution[::-1]
+        spec.voxel_size = Coordinate(zyx_voxel_size)
         #spec.voxel_size = Coordinate((1, 1, 1))
-        offset = Coordinate(vol.voxel_offset)
-        shape = Coordinate(vol.volume_size)
+
+        zyx_offset = vol.voxel_offset[::-1]
+        offset = Coordinate(zyx_offset)
+
+        zyx_shape = vol.volume_size[::-1]
+        shape = Coordinate(zyx_shape)
+
         spec.roi = Roi(offset, shape)
         spec.dtype = vol.dtype
 
@@ -96,9 +103,9 @@ class PrecomputedSource(BatchProvider):
         return spec
 
     def __read(self, vol, roi):
-        #xyz_roi = roi.to_slices()[::-1]
+        xyz_roi = roi.to_slices()[::-1]
         
-        return np.squeeze(vol[roi.to_slices()], axis=3)
+        return np.squeeze(vol[xyz_roi], axis=3)
 
     def name(self):
 
