@@ -60,8 +60,8 @@ class PrecomputedSource(BatchProvider):
             print(voxel_size)
             print('This is dataset roi')
             print(dataset_roi)
-            print('This is offset')
-            print(self.spec[self.key].roi.get_offset())
+            #print('This is offset')
+            #print(self.spec[self.key].roi.get_offset())
             # create array spec
             array_spec = self.spec[key].copy()
             array_spec.roi = request_spec.roi
