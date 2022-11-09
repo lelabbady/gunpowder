@@ -108,7 +108,7 @@ class PrecomputedSource(BatchProvider):
         return spec
 
     def __read(self, vol, roi):
-        xyz_roi = roi.to_slices()[::-1]
+        xyz_roi = roi.to_slices() #[::-1]
         print('******************************** READING CLOUVOLUME ***************************')
         print(xyz_roi)        
         return np.squeeze(vol[xyz_roi], axis=3)
