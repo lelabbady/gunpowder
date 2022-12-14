@@ -110,8 +110,8 @@ class PrecomputedSource(BatchProvider):
     def __read(self, vol, roi):
         xyz_roi = roi.to_slices()[::-1]
         print('******************************** READING CLOUVOLUME ***************************')
-        print(xyz_roi)        
-        return np.squeeze(vol[xyz_roi], axis=3)
+        print(xyz_roi)
+        return np.squeeze(vol[xyz_roi], axis=3).T
 
     def name(self):
 
