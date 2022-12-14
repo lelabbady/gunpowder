@@ -53,8 +53,8 @@ class PrecomputedSource(BatchProvider):
 
         for key, request_spec in request.array_specs.items():
             voxel_size = request_spec.voxel_size
-            #dataset_roi = request_spec.roi / voxel_size
-            #dataset_roi = dataset_roi - self.spec[self.key].roi.get_offset() / voxel_size
+            dataset_roi = request_spec.roi / voxel_size
+            dataset_roi = dataset_roi - self.spec[self.key].roi.get_offset() / voxel_size
             dataset_roi = request_spec.roi
             print('This is voxel_size')
             print(voxel_size)
