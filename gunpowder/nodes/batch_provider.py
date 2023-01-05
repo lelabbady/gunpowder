@@ -154,6 +154,8 @@ class BatchProvider(object):
         return batch
 
     def check_request_consistency(self, request):
+        print(request.items())
+        exit()
 
         for (key, request_spec) in request.items():
 
@@ -169,10 +171,10 @@ class BatchProvider(object):
 
             provided_roi = provided_spec.roi
             request_roi = request_spec.roi
-            print('This is provided_roi')
-            print(provided_roi)
-            print('This is request_roi')
-            print(request_roi)
+            #print('This is provided_roi')
+            #print(provided_roi)
+            #print('This is request_roi')
+            #print(request_roi)
             if provided_roi is not None:
                 assert provided_roi.contains(request_roi), "%s: %s's ROI %s outside of my ROI %s"%(self.name(), key, request_roi, provided_roi)
 
