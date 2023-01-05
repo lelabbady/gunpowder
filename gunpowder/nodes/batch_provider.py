@@ -155,7 +155,6 @@ class BatchProvider(object):
 
     def check_request_consistency(self, request):
         print(request.items())
-        exit()
 
         for (key, request_spec) in request.items():
 
