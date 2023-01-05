@@ -38,6 +38,7 @@ class PrecomputedSource(BatchProvider):
 
     def setup(self):
         for key,vol in self.datasets.items():
+            print('********************KEY and VOL *********************')
             print(key,vol)
 
         for key, vol in self.datasets.items():
@@ -50,6 +51,7 @@ class PrecomputedSource(BatchProvider):
         timing.start()
 
         batch = Batch()
+        print(len(request.array_specs.items()))
 
         for key, request_spec in request.array_specs.items():
             voxel_size = request_spec.voxel_size
