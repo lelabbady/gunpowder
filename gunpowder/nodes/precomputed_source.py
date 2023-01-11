@@ -42,8 +42,8 @@ class PrecomputedSource(BatchProvider):
             print('********************KEY and VOL *********************')
             print(key,vol)
 
-        for key, path in self.datasets.items():
-            vol = CloudVolume(path, cache=False, lru_bytes=0)
+        for key, vol in self.datasets.items():
+            #vol = CloudVolume(path, cache=False, lru_bytes=0)
             spec = self.__read_spec(key, vol)
             self.provides(key, spec)
 
@@ -53,7 +53,7 @@ class PrecomputedSource(BatchProvider):
         timing.start()
 
         batch = Batch()
-        data_vol = CloudVolume(self.filename, cache = False, lru_bytes=0)
+        #data_vol = CloudVolume(self.filename, cache = False, lru_bytes=0)
 
         for key, request_spec in request.array_specs.items():
             voxel_size = request_spec.voxel_size
@@ -71,9 +71,9 @@ class PrecomputedSource(BatchProvider):
             array_spec.roi = request_spec.roi
             # add array to batch
             batch.arrays[key] = Array(
-                self.__read(data_vol, dataset_roi), array_spec,
+                self.__read(self.datasets[key], dataset_roi), array_spec,
             )
-        del(data_vol)
+        #del(data_vol)
         logger.debug("done")
 
         timing.stop()
