@@ -8,6 +8,7 @@ from gunpowder.roi import Roi
 from gunpowder.array import Array
 from gunpowder.array_spec import ArraySpec
 from .batch_provider import BatchProvider
+from cloudvolume import CloudVolume
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +42,8 @@ class PrecomputedSource(BatchProvider):
             print('********************KEY and VOL *********************')
             print(key,vol)
 
-        for key, vol in self.datasets.items():
+        for key, path in self.datasets.items():
+            vol = CloudVolume(path, cache=False, lru_bytes=0)
             spec = self.__read_spec(key, vol)
             self.provides(key, spec)
 
