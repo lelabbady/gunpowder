@@ -120,4 +120,4 @@ class PrecomputedSource(BatchProvider):
 
     def name(self):
 
-        return super().name() + f"[{[vol.cloudpath for vol in self.datasets.values()]}]"
+        return super().name() + f"[{[vol for vol in self.datasets.values()]}]"
