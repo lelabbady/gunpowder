@@ -54,7 +54,6 @@ class PrecomputedSource(BatchProvider):
 
         batch = Batch()
         print(len(request.array_specs.items()))
-        data_vol = CloudVolume(self.filename, cache=False, lru_bytes=0)
 
         for key, request_spec in request.array_specs.items():
             voxel_size = request_spec.voxel_size
@@ -70,7 +69,7 @@ class PrecomputedSource(BatchProvider):
             # create array spec
             array_spec = self.spec[key].copy()
             array_spec.roi = request_spec.roi
-
+            data_vol = CloudVolume(self.filename, cache=False, lru_bytes=0
             # add array to batch
             batch.arrays[key] = Array(
                 self.__read(data_vol, dataset_roi), array_spec,
