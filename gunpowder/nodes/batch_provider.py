@@ -149,11 +149,11 @@ class BatchProvider(object):
 
         self.remove_unneeded(batch, request)
 
-        print('This is batch')
-        print(batch)
-        print('THis is batch keys')
-        batch_keys = set(list(batch.arrays.keys()) + list(batch.points.keys()))
-        print(batch_keys)
+        #print('This is batch')
+        #print(batch)
+        #print('THis is batch keys')
+        #batch_keys = set(list(batch.arrays.keys()) + list(batch.points.keys()))
+        #print(batch_keys)
 
         logger.debug("%s provides %s", self.name(), batch)
 
@@ -170,16 +170,16 @@ class BatchProvider(object):
                                                         "%s"%(
                                                             key,
                                                             type(request_spec)))
-            print('THis is key')
-            print(key)
+            #print('THis is key')
+            #print(key)
             provided_spec = self.spec[key]
 
             provided_roi = provided_spec.roi
             request_roi = request_spec.roi
-            print('This is provided_roi')
-            print(provided_roi)
-            print('This is request_roi')
-            print(request_roi)
+            #print('This is provided_roi')
+            #print(provided_roi)
+            #print('This is request_roi')
+            #print(request_roi)
             if provided_roi is not None:
                 assert provided_roi.contains(request_roi), "%s: %s's ROI %s outside of my ROI %s"%(self.name(), key, request_roi, provided_roi)
 
