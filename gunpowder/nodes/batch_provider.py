@@ -149,6 +149,12 @@ class BatchProvider(object):
 
         self.remove_unneeded(batch, request)
 
+        print('This is batch')
+        print(batch)
+        print('THis is batch keys')
+        batch_keys = set(list(batch.arrays.keys()) + list(batch.points.keys()))
+        print(batch_keys)
+
         logger.debug("%s provides %s", self.name(), batch)
 
         return batch
@@ -164,7 +170,8 @@ class BatchProvider(object):
                                                         "%s"%(
                                                             key,
                                                             type(request_spec)))
-
+            print('THis is key')
+            print(key)
             provided_spec = self.spec[key]
 
             provided_roi = provided_spec.roi
