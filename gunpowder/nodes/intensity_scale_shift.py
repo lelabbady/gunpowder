@@ -27,3 +27,4 @@ class IntensityScaleShift(BatchFilter):
 
         raw = batch.arrays[self.array]
         raw.data = raw.data*self.scale + self.shift
+        print(type(raw.data))
