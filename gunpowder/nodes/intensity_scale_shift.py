@@ -1,4 +1,5 @@
 from .batch_filter import BatchFilter
+import numpy as np
 
 class IntensityScaleShift(BatchFilter):
     '''Scales the intensities of a batch by ``scale``, then adds ``shift``.
@@ -28,3 +29,4 @@ class IntensityScaleShift(BatchFilter):
         raw = batch.arrays[self.array]
         raw.data = raw.data*self.scale + self.shift
         print(type(raw.data))
+        np.save('raw_data_example_%d'%(raw.data.shape[0]),raw.data)
