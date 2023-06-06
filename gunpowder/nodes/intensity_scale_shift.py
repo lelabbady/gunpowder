@@ -29,5 +29,6 @@ class IntensityScaleShift(BatchFilter):
 
         raw = batch.arrays[self.array]
         raw.data = raw.data*self.scale + self.shift
-        print(type(raw.data))
-        np.save('raw_data_example_%d'%(random.randint(0,5000)),raw.data)
+        rand_int = random.randint(0,5000)
+        if rand_int % 10 == 0:
+            np.save('raw_data_example_%d'%(rand_int),raw.data)
